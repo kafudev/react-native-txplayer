@@ -1,5 +1,5 @@
 {
-  "name": "react-native-txplayer",
+  "name": "@kafudev/react-native-txplayer",
   "version": "0.1.2",
   "description": "react-native-txplayer 腾讯播放器SDK",
   "main": "lib/commonjs/index",
