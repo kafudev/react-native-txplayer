@@ -1,6 +1,6 @@
 {
   "name": "react-native-txplayer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "react-native-txplayer 腾讯播放器SDK",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
