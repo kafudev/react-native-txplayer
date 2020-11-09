@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.tencent.liteav.demo.play.R;
+import com.reactnativetxplayer.R;
 import com.tencent.liteav.demo.play.SuperPlayerConst;
 import com.tencent.liteav.demo.play.SuperPlayerGlobalConfig;
 import com.tencent.liteav.demo.play.bean.TCPlayImageSpriteInfo;

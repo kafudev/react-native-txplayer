@@ -1,20 +1,42 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-txplayer';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import Txplayer, { multiply } from 'react-native-txplayer';
 
-export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+export default class App extends React.Component {
+  constructor(props: Object) {
+    super(props);
+    this.state = {
+      result: 0,
+      show: false,
+    };
+  }
 
-  React.useEffect(() => {
-    multiply(3, 5).then(setResult);
-  }, []);
+  componentDidMounted() {
+    multiply(3, 5).then((result: Number) => {
+      this.setState({
+        result,
+      });
+    });
+  }
 
-  return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-      {/* <Txplayer style={styles.player} /> */}
-    </View>
-  );
+  render() {
+    const { result, show } = this.state;
+    return (
+      <View style={styles.container}>
+        <Text>Result: {result}</Text>
+        <Txplayer style={styles.player} showVideoView={show} />
+        <TouchableOpacity
+          onPress={() => {
+            this.setState({
+              show: !show,
+            });
+          }}
+        >
+          <Text>{'打开视频'}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -23,9 +45,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  // player: {
-  //   backgroundColor: '#f60',
-  //   width: 100,
-  //   height: 100,
-  // },
+  player: {
+    backgroundColor: '#f60',
+    width: 100,
+    height: 100,
+  },
 });

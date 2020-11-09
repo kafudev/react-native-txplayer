@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.tencent.liteav.demo.play.R;
+import com.reactnativetxplayer.R;
 
 import java.util.List;
 

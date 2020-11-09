@@ -1,16 +1,27 @@
 package com.reactnativetxplayer;
 
 import androidx.annotation.NonNull;
+import android.view.SurfaceView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.views.image.ImageResizeMode;
 
+import com.reactnativetxplayer.R;
+
+import com.tencent.liteav.demo.play.SuperPlayerConst;
+import com.tencent.liteav.demo.play.SuperPlayerGlobalConfig;
+import com.tencent.liteav.demo.play.SuperPlayerModel;
+import com.tencent.liteav.demo.play.SuperPlayerView;
+import com.tencent.rtmp.TXLiveConstants;
+
 public class TxplayerManager extends SimpleViewManager<TxplayerView> {
 
   ReactApplicationContext mCallerContext;
+  SuperPlayerView mSuperPlayerView;
 
   public TxplayerManager(ReactApplicationContext reactContext) {
     mCallerContext = reactContext;
@@ -25,7 +36,41 @@ public class TxplayerManager extends SimpleViewManager<TxplayerView> {
   @Override
   protected TxplayerView createViewInstance(@NonNull ThemedReactContext reactContext) {
     return new TxplayerView(reactContext);
-//    return new TxplayerView(reactContext, Fresco.newDraweeControllerBuilder(), null, mCallerContext);
+    //    return new TxplayerView(reactContext, Fresco.newDraweeControllerBuilder(), null, mCallerContext);
+  }
+
+  @ReactProp(name = "showVideoView")
+  public void setShowVideoView(final TxplayerView txplayerView, boolean showVideoView) {
+      if (showVideoView) {
+          // SurfaceView surfaceView = ILiveManager.getInstance().getVideoView();
+          // txplayerView.addView(surfaceView);
+        //  mSuperPlayerView = findViewById(R.layout.superplayer_vod_view);
+         mSuperPlayerView = new SuperPlayerView(mCallerContext);
+          // 播放器配置
+          SuperPlayerGlobalConfig prefs = SuperPlayerGlobalConfig.getInstance();
+          // 开启悬浮窗播放
+          prefs.enableFloatWindow = true;
+          // 设置悬浮窗的初始位置和宽高
+          SuperPlayerGlobalConfig.TXRect rect = new SuperPlayerGlobalConfig.TXRect();
+          rect.x = 0;
+          rect.y = 0;
+          rect.width = 810;
+          rect.height = 540;
+          prefs.floatViewRect = rect;
+          // 播放器默认缓存个数
+          prefs.maxCacheItem = 5;
+          // 设置播放器渲染模式
+          prefs.enableHWAcceleration = true;
+          prefs.renderMode = TXLiveConstants.RENDER_MODE_ADJUST_RESOLUTION;
+
+          // 通过URL方式的视频信息配置
+          SuperPlayerModel model2 = new SuperPlayerModel();
+          model2.title  = "测试视频-720P";
+          model2.url = "http://1252463788.vod2.myqcloud.com/95576ef5vodtransgzp1252463788/68e3febf4564972819220421305/v.f30.mp4";
+          // 开始播放
+          mSuperPlayerView.playWithModel(model2);
+          txplayerView.addView(mSuperPlayerView);
+      }
   }
 
 //  @ReactProp(name = "src")

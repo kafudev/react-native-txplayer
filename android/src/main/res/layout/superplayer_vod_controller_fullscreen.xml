@@ -168,6 +168,7 @@
 
     <com.tencent.liteav.demo.play.view.TCVodMoreView
         android:id="@+id/superplayer_vod_more"
+        class="com.tencent.liteav.demo.play.view.TCVodMoreView"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"

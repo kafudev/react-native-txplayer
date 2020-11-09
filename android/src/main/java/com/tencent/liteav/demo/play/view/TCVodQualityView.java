@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.tencent.liteav.demo.play.R;
+import com.reactnativetxplayer.R;
 import com.tencent.liteav.demo.play.bean.TCVideoQuality;
 
 import java.util.ArrayList;
