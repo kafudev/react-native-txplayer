@@ -10,7 +10,6 @@ import com.facebook.react.views.image.ImageResizeMode;
 
 public class TxplayerManager extends SimpleViewManager<TxplayerView> {
 
-  public static final String REACT_CLASS = "RCTTxplayerView";
   ReactApplicationContext mCallerContext;
 
   public TxplayerManager(ReactApplicationContext reactContext) {
@@ -19,7 +18,7 @@ public class TxplayerManager extends SimpleViewManager<TxplayerView> {
 
   @Override
   public String getName() {
-    return REACT_CLASS;
+    return "TxplayerView";
   }
 
   @NonNull
