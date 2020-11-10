@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 
+import com.facebook.react.uimanager.ThemedReactContext;
 import com.reactnativetxplayer.R;
 import com.tencent.liteav.demo.play.SuperPlayerConst;
 import com.tencent.liteav.demo.play.SuperPlayerGlobalConfig;
@@ -119,11 +120,11 @@ public class TCVodMoreView extends RelativeLayout implements RadioGroup.OnChecke
     }
 
     private void updateCurrentLight() {
-        Activity activity = (Activity) mContext;
+        Activity activity = ((ThemedReactContext) mContext).getCurrentActivity();
         Window window = activity.getWindow();
 
         WindowManager.LayoutParams params = window.getAttributes();
-        params.screenBrightness = getActivityBrightness((Activity) mContext);
+        params.screenBrightness = getActivityBrightness(activity);
         window.setAttributes(params);
         if (params.screenBrightness == -1) {
             mSeekBarLight.setProgress(100);
@@ -196,7 +197,7 @@ public class TCVodMoreView extends RelativeLayout implements RadioGroup.OnChecke
     };
 
     private void updateBrightProgress(int progress) {
-        Activity activity = (Activity) mContext;
+        Activity activity = ((ThemedReactContext) mContext).getCurrentActivity();
         Window window = activity.getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
         params.screenBrightness = progress * 1.0f / 100;

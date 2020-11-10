@@ -10,6 +10,8 @@ import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.facebook.react.uimanager.ThemedReactContext;
+
 /**
  * 手势控制视频播放进度、调节亮度音量的工具
  */
@@ -56,6 +58,11 @@ public class TCVideoGestureUtil {
             mWindow = ((Activity) context).getWindow();
             mLayoutParams = mWindow.getAttributes();
             mBrightness = mLayoutParams.screenBrightness;
+        } else if (context instanceof Context) {
+          Activity activity = ((ThemedReactContext) context).getCurrentActivity();
+          mWindow = activity.getWindow();
+          mLayoutParams = mWindow.getAttributes();
+          mBrightness = mLayoutParams.screenBrightness;
         }
         mResolver = context.getContentResolver();
     }

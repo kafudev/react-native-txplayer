@@ -10,9 +10,9 @@
         android:layout_centerInParent="true" />
 
     <com.tencent.liteav.demo.play.controller.TCControllerWindow
-        android:id="@+id/superplayer_controller_small"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+      android:id="@+id/superplayer_controller_small"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent" />
 
     <com.tencent.liteav.demo.play.controller.TCControllerFullScreen
         android:id="@+id/superplayer_controller_large"
@@ -28,5 +28,4 @@
         android:id="@+id/superplayer_controller_float"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </RelativeLayout>
