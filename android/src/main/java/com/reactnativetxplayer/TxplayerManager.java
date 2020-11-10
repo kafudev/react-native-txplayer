@@ -95,6 +95,13 @@ public class TxplayerManager extends SimpleViewManager<TxplayerView> {
         // 重新开始播放
         // 通过URL方式的视频信息配置
         SuperPlayerModel model2 = new SuperPlayerModel();
+
+        // model2.multiURLs = new ArrayList<>();
+        // model2.multiURLs.add(new SuperPlayerModel.SuperPlayerURL("http://1252463788.vod2.myqcloud.com/95576ef5vodtransgzp1252463788/e1ab85305285890781763144364/v.f10.mp4", "流畅"));
+        // model2.multiURLs.add(new SuperPlayerModel.SuperPlayerURL("http://1252463788.vod2.myqcloud.com/95576ef5vodtransgzp1252463788/e1ab85305285890781763144364/v.f20.mp4", "标清"));
+        // model2.multiURLs.add(new SuperPlayerModel.SuperPlayerURL("http://1252463788.vod2.myqcloud.com/95576ef5vodtransgzp1252463788/e1ab85305285890781763144364/v.f30.mp4", "高清"));
+        // model2.playDefaultIndex = 1;// 默认播放标清
+
         model2.appId = 1252463788;
         model2.title = "测试视频-720P";
         model2.url = "http://1252463788.vod2.myqcloud.com/95576ef5vodtransgzp1252463788/68e3febf4564972819220421305/v.f30.mp4";
@@ -124,6 +131,17 @@ public class TxplayerManager extends SimpleViewManager<TxplayerView> {
       // 停止播放
       mSuperPlayerView.resetPlayer();
       txplayerView.onReceiveNativeEvent("stopPlay", mSuperPlayerView.getPlayMode());
+    }
+  }
+
+  @ReactProp(name = "destroyPlay", defaultBoolean = false)
+  public void setDestroyPlay(final TxplayerView txplayerView, boolean destroyPlay) {
+    mSuperPlayerView = txplayerView.getSuperPlayerView();
+    if (destroyPlay) {
+      // 销毁
+      mSuperPlayerView.resetPlayer();
+      mSuperPlayerView.onDestroy();
+      txplayerView.onReceiveNativeEvent("destroyPlay", mSuperPlayerView.getPlayMode());
     }
   }
 
