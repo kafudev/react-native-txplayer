@@ -6,6 +6,7 @@ import android.view.SurfaceView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -19,6 +20,8 @@ import com.tencent.liteav.demo.play.SuperPlayerModel;
 import com.tencent.liteav.demo.play.SuperPlayerView;
 import com.tencent.rtmp.TXLiveConstants;
 
+import java.util.Map;
+
 public class TxplayerManager extends SimpleViewManager<TxplayerView> {
 
   ReactApplicationContext mCallerContext;
@@ -30,7 +33,7 @@ public class TxplayerManager extends SimpleViewManager<TxplayerView> {
 
   @Override
   public String getName() {
-    return "TxplayerView";
+    return "RCTTxplayerView";
   }
 
   @NonNull
@@ -83,9 +86,11 @@ public class TxplayerManager extends SimpleViewManager<TxplayerView> {
       if (mSuperPlayerView.getPlayState() == SuperPlayerConst.PLAYSTATE_PAUSE) {
         mSuperPlayerView.onResume();
         mSuperPlayerView.requestPlayMode(SuperPlayerConst.PLAYMODE_WINDOW);
+        txplayerView.onReceiveNativeEvent("startPlay onResume", mSuperPlayerView.getPlayMode());
       } else if (mSuperPlayerView.getPlayMode() == SuperPlayerConst.PLAYSTATE_END) {
         mSuperPlayerView.onResume();
         mSuperPlayerView.requestPlayMode(SuperPlayerConst.PLAYMODE_WINDOW);
+        txplayerView.onReceiveNativeEvent("startPlay onResume", mSuperPlayerView.getPlayMode());
       } else {
         // 重新开始播放
         // 通过URL方式的视频信息配置
@@ -95,6 +100,7 @@ public class TxplayerManager extends SimpleViewManager<TxplayerView> {
         model2.url = "http://1252463788.vod2.myqcloud.com/95576ef5vodtransgzp1252463788/68e3febf4564972819220421305/v.f30.mp4";
         mSuperPlayerView.playWithModel(model2);
         mSuperPlayerView.requestPlayMode(SuperPlayerConst.PLAYMODE_WINDOW);
+        txplayerView.onReceiveNativeEvent("startPlay replay", mSuperPlayerView.getPlayMode());
       }
     }
   }
@@ -106,6 +112,7 @@ public class TxplayerManager extends SimpleViewManager<TxplayerView> {
       if (mSuperPlayerView.getPlayMode() == SuperPlayerConst.PLAYSTATE_PLAYING) {
         // 暂停播放
         mSuperPlayerView.onPause();
+        txplayerView.onReceiveNativeEvent("pausePlay", mSuperPlayerView.getPlayMode());
       }
     }
   }
@@ -116,7 +123,18 @@ public class TxplayerManager extends SimpleViewManager<TxplayerView> {
     if (stopPlay) {
       // 停止播放
       mSuperPlayerView.resetPlayer();
+      txplayerView.onReceiveNativeEvent("stopPlay", mSuperPlayerView.getPlayMode());
     }
+  }
+
+  public Map getExportedCustomBubblingEventTypeConstants() {
+    return MapBuilder.builder()
+      .put(
+        "topChange",
+        MapBuilder.of(
+          "phasedRegistrationNames",
+          MapBuilder.of("bubbled", "onChange")))
+      .build();
   }
 
 //  @ReactProp(name = "src")

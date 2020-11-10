@@ -673,18 +673,13 @@ public class SuperPlayerView extends RelativeLayout implements ITXVodPlayListene
         removeView(mControllerWindow);
         addView(mControllerFullScreen, mVodControllerFullScreenParams);
         mControllerFullScreen.show();
-//        setLayoutParams(mLayoutParamFullScreenMode);
+        setLayoutParams(mLayoutParamFullScreenMode);
 
         rotateScreenOrientation(SuperPlayerConst.ORIENTATION_LANDSCAPE);
         if (mPlayerViewCallback != null) {
           mPlayerViewCallback.onStartFullScreenPlay();
         }
 
-        // 全屏
-        WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
-        lp.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
-        activity.getWindow().setAttributes(lp);
-        setLayoutParams(lp);
       }
       // 请求窗口模式
       else if (requestPlayMode == SuperPlayerConst.PLAYMODE_WINDOW) {
@@ -693,7 +688,7 @@ public class SuperPlayerView extends RelativeLayout implements ITXVodPlayListene
           try {
             Context viewContext = SuperPlayerView.this.getContext();
             Intent intent = null;
-            if (viewContext instanceof Activity) {
+            if (viewContext instanceof ThemedReactContext) {
               intent = new Intent(SuperPlayerView.this.getContext(), viewContext.getClass());
             } else {
               Toast.makeText(viewContext, "悬浮播放失败", Toast.LENGTH_SHORT).show();

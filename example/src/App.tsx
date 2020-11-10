@@ -32,6 +32,9 @@ export default class App extends React.Component {
           startPlay={play}
           pausePlay={pause}
           stopPlay={stop}
+          onChangeMessage={(msg: object) => {
+            console.log('Txplayer onChangeMessage', msg);
+          }}
         />
         {/* <View style={styles.box}>
           <Text>{'这是覆盖层文字'}</Text>

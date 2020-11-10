@@ -48,14 +48,14 @@
             android:layout_marginLeft="20dp"
             android:src="@drawable/superplayer_ic_vod_pause_normal" />
         <!--播放位置-->
-        <TextView
-            android:id="@+id/superplayer_tv_current"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="00:00"
-            android:textColor="@android:color/white"
-            android:textSize="11.0sp" />
+      <TextView
+        android:id="@+id/superplayer_tv_current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="00:00"
+        android:textColor="@android:color/white"
+        android:textSize="11sp" />
 
         <com.tencent.liteav.demo.play.view.TCPointSeekBar
             android:id="@+id/superplayer_seekbar_progress"
@@ -73,14 +73,14 @@
             app:psb_thumbBackground="@drawable/superplayer_ic_vod_thumb" />
 
         <!--总时长-->
-        <TextView
-            android:id="@+id/superplayer_tv_duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="00:00"
-            android:textColor="@android:color/white"
-            android:textSize="11.0sp" />
+      <TextView
+        android:id="@+id/superplayer_tv_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="00:00"
+        android:textColor="@android:color/white"
+        android:textSize="11sp" />
 
         <ImageView
             android:id="@+id/superplayer_iv_fullscreen"
